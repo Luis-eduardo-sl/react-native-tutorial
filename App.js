@@ -1,26 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, ImageBackground} from 'react-native';
+import Header from './components/Header';
+import Footer from './components/Footer'
+import Body from './components/Body';
+// import { ImageBackground } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-     
-     <View style={styles.header}>
-          <View style={styles.avatar}></View>
-          <Text style={styles.boasVindas}>Luis Eduardo</Text>
-      </View>
-
-
-      <View style={styles.body}>
-        <Text style={styles.boasVindas}>Bem vindo</Text>
-      </View>
-
-      <View style={styles.footer}>
-        <Text style={styles.boasVindas}>©Copyryght 2024</Text>
-      </View>
-
-
-      <StatusBar style="auto" />
+      <ImageBackground 
+      resizeMode="cover" 
+      source={require('./assets/images/bg-mobile.jpg')}
+      style={styles.bg}>
+        <Header />
+        <Body />
+        <Footer />
+      </ImageBackground>
+      <StatusBar style="light" />
 
     </View>
   );
@@ -29,48 +25,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 40,
   },
-  boasVindas:{
-    color: '#fff',
-    fontSize: 25
-  },
-  header: {
+  bg:{
     flex:1,
     width: '100%',
-    color: '#564655',
-    backgroundColor: '##E4E5E7',
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
-
-  body: {
-    flex:3,
-    color: 'red',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#525252',
-    fontSize:  90,
-  },
-
-  footer: {
-    flex:1,
-    color: 'red',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#0B0C0E',
-    fontSize: 30,
-  },
-  avatar:{
-    width: 50,
-    height: 50,
-    backgroundColor: 'blue',
-    borderRadius: 50,
-    marginHorizontal: 10 
-  },
+    justifyContent: 'center'
+  }
 });
