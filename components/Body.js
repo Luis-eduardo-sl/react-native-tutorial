@@ -1,20 +1,29 @@
 import { ScrollView, StyleSheet, Text, View} from 'react-native';
 import { Image } from 'expo-image';
+import H1 from './ui/H1'
+import CardUser from './CardUser';
 
 const Body = () => {
   return (
     <View style={styles.body}>
-        <Text style={styles.boasVindas}>Bem vindo </Text>
-        
-        <View style={styles.card}>
-            <Text style={styles.titulo}>Projeto 1 </Text>
-            <Text style={styles.txt}>A função do projeto é ..... </Text>
-            <Image
-            style={styles.Image}
-            source="https://picsum.photos/seed/696/3000/2000"
-        />
-        </View>
+       <H1>Usuários</H1>
+       <CardUser 
+       avatar= "https://avatars.githubusercontent.com/u/133153563?v=4" 
+       name= "Luis"
+       email="luis0202.eduardo@gmail.com"
+       />
 
+       <CardUser 
+       avatar= "https://avatars.githubusercontent.com/u/133153563?v=4" 
+       name= "Maria"
+       email="maria.eduardo@gmail.com"
+       />
+
+       <CardUser 
+       avatar= "https://avatars.githubusercontent.com/u/133153563?v=4" 
+       name= "Carlos"
+       email="carlos.eduardo@gmail.com"
+       />
   </View> 
    )
 } 
