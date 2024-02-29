@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   bg:{
     flex:1,
     width: '100%',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex: 0
   }
 });
