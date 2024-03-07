@@ -1,5 +1,6 @@
 import { ScrollView, StyleSheet, Text, View, FlatList } from "react-native";
 import { Image } from "expo-image";
+import { useEffect } from "react";
 import H1 from "./ui/H1";
 import CardUser from "./CardUser";
 
@@ -53,6 +54,21 @@ const users = [
 ];
 
 const Body = () => {
+
+  const getUsers = async () => {
+    try{
+      const result= await fetch('http://localhost:3333/user')
+      const data= await result.json()
+      console.log(data)
+    } catch(error){
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   return (
     <View style={styles.body}>
       <H1 style={styles.usuario}>Usuários</H1>
