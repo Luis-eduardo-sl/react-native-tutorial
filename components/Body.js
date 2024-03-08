@@ -57,7 +57,7 @@ const Body = () => {
 
   const getUsers = async () => {
     try{
-      const result= await fetch('http://localhost:3333/user')
+      const result= await fetch('https://backend-api-express-ag0n.onrender.com/user')
       const data= await result.json()
       console.log(data)
     } catch(error){
