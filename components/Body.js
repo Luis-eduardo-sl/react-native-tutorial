@@ -1,65 +1,21 @@
 import { ScrollView, StyleSheet, Text, View, FlatList } from "react-native";
-import { Image } from "expo-image";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import H1 from "./ui/H1";
 import CardUser from "./CardUser";
 
-const users = [
-  {
-    id: 1,
-    name: "Luis",
-    email: "luis@gdfng.vfio",
-    avatar: "https://avatars.githubusercontent.com/u/133153563?v=4",
-  },
-
-  {
-    id: 2,
-    name: "Maria",
-    email: "maria@gdfng.vfio",
-    avatar: "https://avatars.githubusercontent.com/u/133153563?v=4",
-  },
-
-  {
-    id: 3,
-    name: "Carlos",
-    email: "carlos@gdfng.vfio",
-    avatar: "https://avatars.githubusercontent.com/u/133153563?v=4",
-  },
-  {
-    id: 4,
-    name: "Fernanda",
-    email: "carlos@gdfng.vfio",
-    avatar: "https://avatars.githubusercontent.com/u/133153563?v=4",
-  },
-  {
-    id: 5,
-    name: "Anderson",
-    email: "carlos@gdfng.vfio",
-    avatar: "https://avatars.githubusercontent.com/u/133153563?v=4",
-  },
-
-  {
-    id: 6,
-    name: "Anderson",
-    email: "carlos@gdfng.vfio",
-    avatar: "https://avatars.githubusercontent.com/u/133153563?v=4",
-  },
-
-  {
-    id: 7,
-    name: "Anderson",
-    email: "carlos@gdfng.vfio",
-    avatar: "https://avatars.githubusercontent.com/u/133153563?v=4",
-  },
-];
 
 const Body = () => {
+
+  const [users, setUsers] = useState([])
+
+  
 
   const getUsers = async () => {
     try{
       const result= await fetch('https://backend-api-express-ag0n.onrender.com/user')
       const data= await result.json()
       console.log(data)
+      setUsers(data.users)
     } catch(error){
       console.log(error)
     }
