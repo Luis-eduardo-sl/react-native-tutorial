@@ -2,11 +2,13 @@ import { ScrollView, StyleSheet, Text, View, FlatList } from "react-native";
 import { useEffect, useState} from "react";
 import H1 from "./ui/H1";
 import CardUser from "./CardUser";
+import CardProduct from "./CardProduct";
 
 
 const Body = () => {
 
   const [users, setUsers] = useState([])
+  const [products, setProducts] = useState([])
 
   
 
@@ -21,12 +23,25 @@ const Body = () => {
     }
   }
 
+  const getProducts = async () => {
+    try{
+      const result= await fetch ('https://backend-api-express-ag0n.onrender.com/product')
+      const data= await result.json()
+      console.log(data)
+      setProducts(data.product)
+    } catch(error){
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     getUsers()
+    getProducts()
   }, [])
 
   return (
-    <View style={styles.body}>
+    <View style= {styles.largura}>
+    <ScrollView contentContainerStyle={styles.scrollViewContent} style={styles.body}>
       <H1 style={styles.usuario}>Usuários</H1>
       <View style={styles.listUser}>
         <FlatList
@@ -45,19 +60,30 @@ const Body = () => {
           keyExtractor={(user) => user.id}
         />
       </View>
+
+      <H1 style={styles.usuario}>Produtos</H1>
+      <View style={styles.listProducts}>
+        <FlatList
+          data={products}
+          renderItem={({ item }) => <CardProduct product={item} />}
+          keyExtractor={(product) => product.id}
+        />
+      </View>
+      
+    </ScrollView>
     </View>
-    
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    flex: 3,
-    color: "red",
+    flex: 1,
     width: "100%",
+    height: 500,
+  },
+  scrollViewContent: {
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 90,
   },
   Image: {
     marginHorizontal: 17,
@@ -71,23 +97,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
   },
-  card: {
-    marginTop: 40,
-    backgroundColor: "#9AA0A6",
-    width: 370,
-    height: 300,
-    borderRadius: 7,
-  },
-  titulo: {
+  usuario: {
     marginTop: 15,
     marginLeft: 10,
     fontSize: 20,
-    color: "white",
-  },
-  txt: {
-    marginTop: 15,
-    marginLeft: 20,
-    fontSize: 15,
     color: "white",
   },
   listUser: {
@@ -96,6 +109,13 @@ const styles = StyleSheet.create({
   listUserr: {
     height: 350,
   },
+  listProducts:{
+    height: 350,
+  },
+  largura:{
+    flex: 5,
+
+  }
 });
 
 export default Body;
