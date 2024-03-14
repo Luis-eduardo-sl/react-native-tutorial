@@ -1,23 +1,23 @@
 import {Text, View, StyleSheet} from 'react-native'
 import { Image } from 'expo-image'
-import H4 from './ui/H4'
+import H4 from './ui/H4.js'
 
-const CardProduct = ({name, price, quantity, foto}) => {
+const CardProduct = ({product}) => {
     return(
         <View style= {styles.card}>
-            <View style = {style.imageBox}>
+            <View style = {styles.imageBox}>
                 <View>
                     <Image 
-                    style={style.image}
-                    source = {foto}
+                    style={styles.image}
+                    source = {product.photo}
                     />
                 </View>
             </View>
 
             <View>
-                <H4> {name}</H4>
-                <Text> {price}</Text>
-                <Text> {quantity}</Text>
+                <H4 >{product.name}</H4>
+                <Text>R$ {product.price}</Text>
+                <Text>Quantidade: {product.quantity}</Text>
             </View>
         </View>
     )
@@ -44,6 +44,9 @@ const styles = StyleSheet.create({
     },
     email:{
         marginTop: 5
+    }, 
+    nome:{
+        fontWeight: "bold"
     }
 })
 
