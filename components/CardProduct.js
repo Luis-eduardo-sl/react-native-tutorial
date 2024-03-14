@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     image:{
-        width: 70,
-        height: 70,
+        width: 100,
+        height: 95,
         borderRadius:3
     },
     email:{
