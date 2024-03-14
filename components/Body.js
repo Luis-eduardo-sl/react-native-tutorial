@@ -44,12 +44,14 @@ const Body = () => {
     <ScrollView contentContainerStyle={styles.scrollViewContent} style={styles.body}>
       <H1 style={styles.usuario}>Usuários</H1>
       <View style={styles.listUser}>
+        {users.length ?
         <FlatList
           data={users}
           renderItem={({ item }) => <CardUser user={item} />}
           keyExtractor={(user) => user.id}
           horizontal={true}
-        />
+        /> :
+        <Text style={{color: "#FFF", fontSize: 20}}>Loading...</Text> }
       </View>
       
       <H1 style={styles.usuario}>Usuários</H1>
