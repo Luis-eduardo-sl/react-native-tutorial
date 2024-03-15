@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
         height: 100,
         backgroundColor: '#fff',
         borderRadius: 20,
-        marginVertical: 10
+        marginVertical: 10,
+        marginHorizontal: 10
     },
     imageBox:{
         paddingHorizontal: 10
