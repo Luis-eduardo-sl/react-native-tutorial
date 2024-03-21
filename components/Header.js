@@ -22,18 +22,15 @@ const styles = StyleSheet.create({
     header: {
         flex:1,
         width: '100%',
-        // color: '#564655',
-        // backgroundColor: '#E4E5E7',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        margin: 10
       },
     avatar:{
         width: 50,
         height: 50,
-        // backgroundColor: '#525252',
         borderRadius: 25,
         marginHorizontal: 10 ,
-        // overflow: 'hidden'
       },
       avatarImg:{
         width: 50,
