@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
     customButton: {
         backgroundColor: "#fafafa",
         borderRadius: 5,
-        paddingVertical: 8,
-        paddingHorizontal: 100
+        paddingVertical: 5,
+        paddingHorizontal: 30,
+        textAlign: "center"
     },
     thButton:{
         borderRadius:20,
