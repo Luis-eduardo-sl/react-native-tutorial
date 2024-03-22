@@ -11,9 +11,9 @@ const Button = ({title, onPress}) => {
 }
 const styles = StyleSheet.create({
     customButton: {
-        backgroundColor: "#fafafa",
+        backgroundColor: "#1177D1",
         borderRadius: 5,
-        paddingVertical: 5,
+        paddingVertical: 7,
         paddingHorizontal: 30,
         textAlign: "center"
     },
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     textButton:{
-        color: '#525252'
+        color: '#E4E5E7',
+        textAlign: 'center'
     }
 })
 
