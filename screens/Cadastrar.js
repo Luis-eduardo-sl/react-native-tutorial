@@ -1,6 +1,7 @@
-import {View, Text, StyleSheet, Button, TextInput,ScrollView} from 'react-native'
+import {View, Text, StyleSheet,  TextInput,ScrollView} from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { useState } from 'react';
+import { useState } from 'react'
+import Button from '../components/ui/Button'
 
 
 const Cadastrar = () =>{
@@ -24,9 +25,13 @@ const Cadastrar = () =>{
             body: JSON.stringify({name: txtName, email: txtEmail,avatar: txtAvatar})}
           );
           const data = await result.json();
-          console.log(data);
-          setUsers([data.user, ...users])
-          navigation.goBack()
+          console.log(data)
+          if(data?.sucess){
+            setUsers([...users, data.user])
+            navigation.goBack()
+          } else {
+            alert(data.error)
+          }        
         } catch (error) {
           console.log(error);
         }
