@@ -1,14 +1,18 @@
-import {ScrollView, StyleSheet, Text, View, FlatList, } from "react-native";
+import {ScrollView, StyleSheet, Text, View, FlatList, Platform} from "react-native";
 import { useEffect, useState } from "react";
 import H1 from "./ui/H1";
 import CardUser from "./CardUser";
 import Button from "./ui/Button";
 import { useNavigation } from "@react-navigation/native";
+import Header from './Header'
+import Footer from './Footer'
 
 const Body = () => {
 
   const [users, setUsers] = useState([]);
   const navigation = useNavigation()
+
+  console.log('Plataforma Atual: ', Platform.OS);
 
   const getUsers = async () => {
     try {
@@ -36,11 +40,6 @@ const Body = () => {
         />
 
       </View>
-     
-        {/* <Button
-        onPress={() => getUsers()} 
-        title = 'Recarregar'>
-        </Button> */}
 
         <View style={styles.listUser}>
        
@@ -48,7 +47,11 @@ const Body = () => {
             <FlatList
               data={users}
               renderItem={({ item }) => <CardUser user={item} />}
+              ListHeaderComponent={Header}
+              ListFooterComponent={Footer}
               keyExtractor={(user) => user.id}
+              contentContainerStyle={styles.flatListUser}
+
             />
           ) : (
             <Text style={{ color: "#FFF", fontSize: 20 }}>Loading...</Text>
@@ -63,23 +66,28 @@ const Body = () => {
 
 const styles = StyleSheet.create({
   body: {
-    flex: 5,
+    flex: 1,
     width: "100%",
   },
   
   listUser: {
+    display:'flex',
     width: "100%",
-    alignItems: "center"
+    alignItems: "center",
+    maxHeight: Platform.OS === 'web' ? '90vh' : null
   },
   usuario:{
-    padding: 1
+    padding: 1,
+
   },
   titleAdd:{
-    flex:1,
+    display:'flex',
     flexDirection:'row',
-    justifyContent: 'space-around',
-    paddingHorizontal: 20
-
+    justifyContent: 'space-between',
+    paddingHorizontal: 10
+  },
+  flatListUser:{
+    // alignSelf: 'center'
   }
   
 });

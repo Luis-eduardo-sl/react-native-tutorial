@@ -4,17 +4,15 @@ import Header from '../components/Header';
 import Footer from '../components/Footer'
 import Body from '../components/Body';
 
-function listUser() {
+function ListUser() {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-          <Header />
+    <View style={styles.container}>
+      <View >
           <Body />
-          <Footer />
         <StatusBar style="light" />
 
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -26,11 +24,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bg:{
-    flex:1,
+    // flex:1,
     width: '100%',
     justifyContent: 'center',
-    zIndex: 0
+    // zIndex: 0
   }
 });
 
-export default listUser
+export default ListUser
