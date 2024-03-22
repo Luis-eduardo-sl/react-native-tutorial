@@ -12,7 +12,7 @@ const Cadastrar = () =>{
     const [txtEmail, setTxtEmail]= useState('')
     const [txtAvatar, setTxtAvatar]= useState('')
 
-    const postUser = async (user) =>{
+    const postUser = async () =>{
         console.log({name: txtName, email: txtEmail,avatar: txtAvatar})
         try {
           const result = await fetch(
