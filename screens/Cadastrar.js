@@ -2,12 +2,15 @@ import {View, Text, StyleSheet,  TextInput,ScrollView} from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useState } from 'react'
 import Button from '../components/ui/Button'
+import H1 from '../components/ui/H1'
 
 
 const Cadastrar = () =>{
 
     const navigation = useNavigation()
-    const {users, setUsers}= useRoute().params
+    // const {users, setUsers}= useRoute().params
+    const users= []
+    const setUsers= []
 
     const [txtName, setTxtName]= useState('')
     const [txtEmail, setTxtEmail]= useState('')
@@ -40,6 +43,8 @@ const Cadastrar = () =>{
 
     return(
         <ScrollView>
+          <H1>Cadastrar User</H1>
+          <Button title="< Voltar" onPress={() => navigation.goBack()} />
             <View style={styles.form}>
             <TextInput 
             style={styles.input}
