@@ -1,92 +1,85 @@
-import {View, Text, StyleSheet,  TextInput,ScrollView} from 'react-native'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { useState } from 'react'
+import {View, TextInput, StyleSheet, ScrollView} from 'react-native'
 import Button from '../components/ui/Button'
-import H1 from '../components/ui/H1'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import H1 from '../components/ui/H1.js'
 
-
-const Cadastrar = () =>{
-
+const Cadastrar = () => {
     const navigation = useNavigation()
-    // const {users, setUsers}= useRoute().params
-    const users= []
-    const setUsers= []
+    const route = useRoute()
+    // const {users, setUsers} = route.params
+    //const {users, setUsers} = route.params
+    const users = []
+    const setUsers = () => {} 
 
-    const [txtName, setTxtName]= useState('')
-    const [txtEmail, setTxtEmail]= useState('')
-    const [txtAvatar, setTxtAvatar]= useState('')
-
+    const [txtName, setTxtName] = useState('')
+    const [txtEmail, setTxtEmail] = useState('')
+    const [txtAvatar, setTxtAvatar] = useState('')
     const postUser = async () =>{
-        console.log({name: txtName, email: txtEmail,avatar: txtAvatar})
-        try {
-          const result = await fetch(
-            "https://backend-api-express-ag0n.onrender.com/user",{
+        try{
+          const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user', {
             method: "POST",
             headers:{
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({name: txtName, email: txtEmail,avatar: txtAvatar})}
-          );
-          const data = await result.json();
+            body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
+          })
+          const data = await result.json()
           console.log(data)
-          if(data?.sucess){
+          if(data?.success){
             setUsers([...users, data.user])
             navigation.goBack()
           } else {
             alert(data.error)
-          }        
-        } catch (error) {
-          console.log(error);
+          }
+        } catch (error){
+          console.log('Error postUser ' + error.message)
+          alert(error.message)
         }
-      }
-    
+      } 
 
-    return(
+    return (
         <ScrollView>
-          <H1>Cadastrar User</H1>
-          <Button title="< Voltar" onPress={() => navigation.goBack()} />
+            <H1>Cadastrar User</H1>
+            <Button title="< Voltar" onPress={() => navigation.goBack()} />
             <View style={styles.form}>
-            <TextInput 
-            style={styles.input}
-            onChangeText={setTxtName}
-            value={txtName}
-            placeholder="Nome..."
-            />
-
-            <TextInput 
-            style={styles.input}
-            onChangeText={setTxtEmail}
-            value={txtEmail}
-            placeholder="Email..."
-            />
-            <TextInput 
-            style={styles.input}
-            onChangeText={setTxtAvatar}
-            value={txtAvatar}
-            placeholder="Avatar..."
-            />
-
-            <Button title= "Cadastrar" 
-            onPress={(postUser)}/>
-
+                <TextInput 
+                style={styles.input}
+                placeholder='Nome...'
+                onChangeText={setTxtName}
+                value={txtName}
+                />
+                <TextInput 
+                style={styles.input}
+                placeholder='Email...'
+                onChangeText={setTxtEmail}
+                value={txtEmail}
+                />
+                <TextInput 
+                style={styles.input}
+                placeholder='Avatar...'
+                onChangeText={setTxtAvatar}
+                value={txtAvatar}
+                />
+                <Button 
+                    title="Cadastrar Usuário"
+                    onPress={postUser}
+                />
             </View>
         </ScrollView>
     )
 }
-
 const styles = StyleSheet.create({
-    form:{
+    form: {
         display: 'flex',
-        padding:40
+        padding: 40
     },
-    input:{
+    input: {
         height: 40,
-        width: "100%",
-        backgroundColor: '#fff',
+        width: '100%',
+        backgroundColor: '#FFF',
         borderWidth: 1,
         marginBottom: 18,
-        padding:10
-      }
+        padding: 10,
+    }
 })
-
 export default Cadastrar
