@@ -10,6 +10,7 @@ const Editar = () => {
   const navigation = useNavigation()
 
   const removeUserStore = useUserStore((state)=> state.removeUser)
+  const updateUserStore = useUserStore((state)=> state.updateUser)
 
   const {user} = route.params
 
@@ -28,7 +29,7 @@ const Editar = () => {
         const data = await result.json()
         console.log(data)
         if(data?.success){
-          //update do user na store com o data.user
+          updateUserStore(user.id, {name: txtName, email: txtEmail, avatar: txtAvatar})
           navigation.goBack()
         } else {
           alert(data.error)
