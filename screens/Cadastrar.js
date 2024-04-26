@@ -1,35 +1,29 @@
+import { useState } from 'react'
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native'
 import Button from '../components/ui/Button'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import H1 from '../components/ui/H1.js'
-import useUserStore from '../stores/userStore.js'
 
 const Cadastrar = () => {
     const navigation = useNavigation()
-    const route = useRoute()
-
-    const addUser = useUserStore((state) => state.addUser)
-
-
-    const users = []
-    const setUsers = () => {} 
 
     const [txtName, setTxtName] = useState('')
     const [txtEmail, setTxtEmail] = useState('')
     const [txtAvatar, setTxtAvatar] = useState('')
+    const [txtPass, setTxtPass] = useState('')
+
     const postUser = async () =>{
         try{
-          const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user', {
+          const result = await fetch('https://backend-api-express-ag0n.onrender.com/user', {
             method: "POST",
             headers:{
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
+            body: JSON.stringify({name: txtName, email: txtEmail, pass: txtPass, avatar: txtAvatar})
           })
           const data = await result.json()
           console.log(data)
           if(data?.success){
-            addUser(data.user)
             navigation.goBack()
           } else {
             alert(data.error)
@@ -42,8 +36,6 @@ const Cadastrar = () => {
 
     return (
         <ScrollView>
-            <H1>Cadastrar User</H1>
-            <Button title="< Voltar" onPress={() => navigation.goBack()} />
             <View style={styles.form}>
                 <TextInput 
                 style={styles.input}
@@ -59,6 +51,12 @@ const Cadastrar = () => {
                 />
                 <TextInput 
                 style={styles.input}
+                placeholder='Senha...'
+                onChangeText={setTxtPass}
+                value={txtPass}
+                />
+                <TextInput 
+                style={styles.input}
                 placeholder='Avatar...'
                 onChangeText={setTxtAvatar}
                 value={txtAvatar}
@@ -71,6 +69,7 @@ const Cadastrar = () => {
         </ScrollView>
     )
 }
+
 const styles = StyleSheet.create({
     form: {
         display: 'flex',
@@ -85,4 +84,5 @@ const styles = StyleSheet.create({
         padding: 10,
     }
 })
+
 export default Cadastrar
