@@ -10,21 +10,15 @@ import Products from './screens/Products.js'
 import Editar from './screens/Editar'
 import Splash from './screens/Splash.js'
 import Login from './screens/Login.js'
+
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 //const Drawer = createDrawerNavigator()
+
 const UserNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Principal" component={ListUser} />
-      <Stack.Screen
-        name="Cadastrar"
-        component={Cadastrar}
-        options={{
-          title: "Cadastrar User",
-          headerShown: false
-        }}
-      />
       <Stack.Screen
         name="Editar"
         component={Editar}
@@ -36,6 +30,7 @@ const UserNavigator = () => {
     </Stack.Navigator>
   )
 }
+
 const MainNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{
@@ -66,6 +61,8 @@ const MainNavigator = () => {
     </Tab.Navigator>
   )
 }
+
+
 export default function App() {
   return (
     <NavigationContainer>

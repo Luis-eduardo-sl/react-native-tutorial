@@ -1,54 +1,51 @@
 import {View, Text, StyleSheet, TextInput} from 'react-native'
 import Button from '../components/ui/Button.js'
-import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
 
 const Products = () => {
-  const [nameUser, setNameUser]= useState('')
+  const [nameUser, setNameUser] = useState('')
+  
+  const saveAS = async (data, value) => {
+    try {
+      await AsyncStorage.setItem(data, value)
+    } catch (error){
+      console.log('Erro ao gravar dado')
+    }
+  }
 
+  const getAS = async (data) => {
+    let dataFound = null
+    try {
+      dataFound = await AsyncStorage.getItem(data)
+    } catch (error){
+      console.log('Erro ao ler dado')
+    }
+    return dataFound
+  }
 
-    const saveAS = async (data, value) =>{
-      try{
-        await AsyncStorage.setItem(data, value)
-      } catch(error){
-        console.log('erro ao gravar dados');
-      }
+  useEffect(() => {
+    const getNome = async () =>{
+      const nome = await getAS('nome')
+      setNameUser(nome)
     }
 
-    const getAS = async (data) =>{
-      let dataFound = null
-      try{
-        dataFound = await AsyncStorage.getItem('nome')
-      } catch(error){
-        console.log('erro ao ler dados');
-      }
-      return(dataFound)
-    }
-
-
-    useEffect(()=> {
-      const getNome = async () =>{
-        const nome = await getAS('nome')
-        setNameUser(nome)
-      }
-
-      getNome()
-    },[])
+    getNome()
+  },[])
 
   return (
     <View style={styles.container}>
-
+      
       <Text>Nome salvo: {nameUser}</Text>
 
       <Text>Exemplo AsyncStorage</Text>
 
       <TextInput 
-                  style={styles.input}
-                  placeholder='Nome'
-                  onChangeText={setNameUser}
-                  value={nameUser}
-        />
-
+                style={styles.input}
+                placeholder='Nome...'
+                onChangeText={setNameUser}
+                value={nameUser}
+                /> 
         <Button title="Cadastrar Nome User" 
         onPress={() => saveAS('nome', nameUser)}
         />
