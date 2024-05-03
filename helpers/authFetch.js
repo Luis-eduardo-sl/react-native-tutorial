@@ -1,4 +1,4 @@
-import useUserLoggedStore from "../stores/useUserLoggedStore.js"
+import useUserLoggedStore from '../stores/userLoggedStore.js'
 
 const authFetch = async (url, options) => {
 

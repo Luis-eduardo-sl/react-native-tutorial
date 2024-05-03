@@ -3,12 +3,13 @@ import {View, Text, StyleSheet, TextInput} from 'react-native'
 import { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import useUserLoggedStore from '../stores/useUserLoggedStore.js'
+import useUserStore from '../stores/userStore.js'
+
 
 const Splash = () => {
 
   const navigation = useNavigation()
-  const login = useUserLoggedStore(state => state.login)
+  const login = useUserStore(state => state.login)
 
   useEffect(() => { 
     const checkUserLogged = async () => {

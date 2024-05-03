@@ -8,7 +8,8 @@ import Header from './Header'
 import Footer from './Footer'
 import useUserStore from '../stores/userStore.js'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import useUserLoggedStore from '../stores/useUserLoggedStore.js'
+import useUserLoggedStore from '../stores/userLoggedStore.js'
+
 
 const Body = () => {
   const navigation = useNavigation()

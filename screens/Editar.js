@@ -3,14 +3,13 @@ import Button from '../components/ui/Button'
 import { useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import useUserStore from '../stores/userStore.js'
-import useUserLoggedStore from '../stores/useUserLoggedStore.js'
 
 const Editar = () => {
   const route = useRoute()
   const navigation = useNavigation()
 
   const removeUserStore = useUserStore(state => state.removeUser)
-  const token = useUserLoggedStore(state => state.token)
+  const token = useUserStore(state => state.token)
 
   const {user} = route.params
 
