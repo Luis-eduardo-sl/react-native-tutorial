@@ -2,34 +2,36 @@ import {View, StyleSheet, ScrollView, TextInput} from 'react-native'
 import Button from '../components/ui/Button'
 import { useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import useUserStore from '../stores/userStore'
-
+import useUserStore from '../stores/userStore.js'
+import useUserLoggedStore from '../stores/useUserLoggedStore.js'
 
 const Editar = () => {
   const route = useRoute()
   const navigation = useNavigation()
 
-  const removeUserStore = useUserStore((state)=> state.removeUser)
-  const updateUserStore = useUserStore((state)=> state.updateUser)
+  const removeUserStore = useUserStore(state => state.removeUser)
+  const token = useUserLoggedStore(state => state.token)
 
   const {user} = route.params
 
   const [txtName, setTxtName] = useState(user.name)
   const [txtEmail, setTxtEmail] = useState(user.email)
   const [txtAvatar, setTxtAvatar] = useState(user.avatar)
+
   const editUser = async () =>{
       try{
         const result = await fetch('https://backend-api-express-ag0n.onrender.com/user/'+user.id, {
           method: "PUT",
           headers:{
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
           },
           body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
         })
         const data = await result.json()
         console.log(data)
         if(data?.success){
-          updateUserStore(user.id, {name: txtName, email: txtEmail, avatar: txtAvatar})
+          //update do user na store com o data.user
           navigation.goBack()
         } else {
           alert(data.error)
@@ -39,12 +41,14 @@ const Editar = () => {
         alert(error.message)
       }
     } 
+
     const removeUser = async () =>{
       try{
-        const result = await fetch(`https://backend-api-express-ag0n.onrender.com/user/${user.id}`, {
+        const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user/'+user.id, {
           method: "DELETE",
           headers:{
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
           }
         })
         const data = await result.json()
@@ -60,6 +64,7 @@ const Editar = () => {
         alert(error.message)
       }
     } 
+
   return (
       <ScrollView>
           <View style={styles.form}>
@@ -85,6 +90,7 @@ const Editar = () => {
                   title="Editar Usuário"
                   onPress={editUser}
               />
+
               <Button 
                   title="Remover Usuário"
                   onPress={removeUser}
@@ -98,6 +104,7 @@ const Editar = () => {
       </ScrollView>
   )
 }
+
 const styles = StyleSheet.create({
   form: {
       display: 'flex',
@@ -112,4 +119,5 @@ const styles = StyleSheet.create({
       padding: 10,
   }
 })
+
 export default Editar
